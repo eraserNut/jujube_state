@@ -57,7 +57,7 @@ classes = ('beak', 'breach', 'distortion', 'good', 'mould', 'wizened')
 # Model
 print('==> Building model..')
 # net = VGG('VGG19')
-net = ResNet50()
+# net = ResNet50()
 # net = PreActResNet18()
 # net = GoogLeNet()
 # net = DenseNet121()
@@ -65,7 +65,7 @@ net = ResNet50()
 # net = MobileNet()
 # net = MobileNetV2()
 # net = DPN92()
-# net = ShuffleNetG2()
+net = ShuffleNetG2()
 # net = SENet18()
 # net = ShuffleNetV2(1)
 
@@ -81,7 +81,7 @@ if args.resume:
     # Load checkpoint.
     print('==> Resuming from checkpoint..')
     assert os.path.isdir('checkpoint'), 'Error: no checkpoint directory found!'
-    checkpoint = torch.load('./checkpoint/ckpt.t7')
+    checkpoint = torch.load('./checkpoint/shufflenet.net')
     net.load_state_dict(checkpoint['net'])
     best_acc = checkpoint['acc']
     start_epoch = checkpoint['epoch']
@@ -146,7 +146,7 @@ def test(epoch):
         }
         if not os.path.isdir('checkpoint'):
             os.mkdir('checkpoint')
-        torch.save(state, './checkpoint/ckpt.t7')
+        torch.save(state, './checkpoint/shufflenet.net')
         best_acc = acc
 
 
